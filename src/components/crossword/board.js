@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import ClueList from "./clue_list";
 import { Modal } from "@mui/material";
 import { useUser } from "@/contexts/UserContext";
-import axios from 'axios'
+import axios from "axios";
 
 let START_SQUARES = [];
 
@@ -20,7 +20,7 @@ function Board() {
   const { userFSData } = useUser();
   let ANCESTORS = [];
   let ascendencyNums = [];
-  
+
   //Creates an array of all names that could be added to the crossword
   for (const [key, value] of userFSData) {
     let currentAncestorName = value.name.compressedName;
@@ -68,24 +68,26 @@ function Board() {
   // Gets the clue data for each word that is put into the crossword and sets it to the clues variable
   async function fetchData(userFSData, ascendancyNums) {
     //TO TEST LOCALLY, COMMENT OUT THE LOWER URL AND UNCOMMENT THE TOP ONE. THEN WHEN YOU PUSH TO MAIN, MAKE SURE THE TOP URL IS COMMENTED AND THE BOTTOM IS NOT
-    //const url = "http://localhost:3000/api/questiongenerator";
-    const url = "https://games.byufamilytech.org/api/questiongenerator";
-  
+    const url = "http://localhost:3000/api/questiongenerator";
+    // const url = "https://games.byufamilytech.org/api/questiongenerator";
+
     try {
-      const res = await axios.post(url, {userFSData, ascendancyNums});
+      const res = await axios.post(url, { userFSData, ascendancyNums });
       setClues(res.data);
     } catch (error) {
       console.log(error);
     }
   }
-  
+
   useEffect(() => {
     if (userFSData) {
-      console.log("data in if statement " + Array.from(userFSData.values()).length);
+      console.log(
+        "data in if statement " + Array.from(userFSData.values()).length
+      );
       const fsDataObj = Object.fromEntries(userFSData);
       fetchData(fsDataObj, justAscendencyNums);
     }
-  }, [])
+  }, []);
 
   // Handles what happens when a letter is changed on the board
   function handleSquareInput(letter, row, col, inputLocation) {
@@ -134,16 +136,18 @@ function Board() {
   // Implements navigating the board with arrow keys and backspace on empty square
   function handleKeyDown(event, row, col, inputLocation) {
     if (event.keyCode === 37) {
-      let movedLocation = inputLocation.current[row * DIMENSIONS + col - 1].focus();
+      let movedLocation =
+        inputLocation.current[row * DIMENSIONS + col - 1].focus();
       if (movedLocation != null) {
         movedLocation.focus();
-        movedLocation.setSelectionRange(1,1);
+        movedLocation.setSelectionRange(1, 1);
       }
     } else if (event.keyCode === 38) {
-      let movedLocation = inputLocation.current[row * DIMENSIONS + col - DIMENSIONS];
+      let movedLocation =
+        inputLocation.current[row * DIMENSIONS + col - DIMENSIONS];
       if (movedLocation != null) {
         movedLocation.focus();
-        movedLocation.setSelectionRange(1,1);
+        movedLocation.setSelectionRange(1, 1);
       }
     } else if (event.keyCode === 39) {
       inputLocation.current[row * DIMENSIONS + col + 1].focus();
@@ -512,7 +516,7 @@ function Board() {
             )[0]
           ) + 1,
       });
-      setVertClues(VERTICAL_WORDS)
+      setVertClues(VERTICAL_WORDS);
     }
     currentBoard[collision.row].CURRENT_ROW[collision.col].KEY_CHARACTER =
       collision.character;
@@ -594,7 +598,8 @@ function Board() {
       BOARD.push({ CURRENT_ROW, id: currentRow });
     }
 
-    const randomAncestor = SORTED_CLUE_LIST[Math.floor(Math.random() * SORTED_CLUE_LIST.length)]
+    const randomAncestor =
+      SORTED_CLUE_LIST[Math.floor(Math.random() * SORTED_CLUE_LIST.length)];
 
     BOARD = insertFirstWord(
       9,
@@ -619,7 +624,7 @@ function Board() {
     for (let i = 0; i < ascendencyNums.length; i++) {
       justAscendencyNums[i] = ascendencyNums[i].ASCENDENCY_NUMBER;
     }
-    
+
     return BOARD;
   }
   // Inserts the first word at a set position in the board
@@ -664,7 +669,7 @@ function Board() {
             )[0]
           ) + 1,
       });
-      setHorClues(HORIZONTAL_WORDS)
+      setHorClues(HORIZONTAL_WORDS);
       REMAINING_WORDS.splice(wordIndex, 1);
       ascendencyNums.push({ ASCENDENCY_NUMBER: aNum, NAME: word });
     }
@@ -689,7 +694,7 @@ function Board() {
   }
 
   let clueNumber = -1;
-  return !loading ?(
+  return !loading ? (
     <>
       <div>
         {board.map((rows) => {
@@ -741,6 +746,8 @@ function Board() {
         </div>
       </Modal>
     </>
-  ): (<div>Loading...</div>);
+  ) : (
+    <div>Loading...</div>
+  );
 }
 export default Board;
