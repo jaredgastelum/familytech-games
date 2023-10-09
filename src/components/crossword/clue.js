@@ -21,7 +21,7 @@ function Clue(props) {
   // Highlights the row or column in the crossword when the corresponding clue is clicked
   function handleClueClick(inputId) {
     console.log("clue " + number + " clicked");
-    const inputElement = document.getElementById(inputId);
+    const inputElement = document.getElementById(number);
     if (inputElement) {
       inputElement.focus();
       inputElement.select();
@@ -50,9 +50,14 @@ function Clue(props) {
   //   setDisplayClue(false);
   // }, []);
 
+  const clueStyle = {
+    cursor: "pointer", // Set the cursor style to pointer
+  };
+
   return (
     <>
       <div
+        style={clueStyle} // Cursor becomes a pointer when hovering over the clue
         onContextMenu={handleContextMenu}
         onClick={displayClue ? null : handleNameClick}
         onDoubleClick={handleClueClick}
