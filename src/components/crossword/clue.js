@@ -16,9 +16,16 @@ function Clue(props) {
     setDisplayClue(!displayClue);
   }
 
+  /// MY WORKKKKKK
+
   // Highlights the row or column in the crossword when the corresponding clue is clicked
-  function handleClueClick() {
+  function handleClueClick(inputId) {
     console.log("clue " + number + " clicked");
+    const inputElement = document.getElementById(inputId);
+    if (inputElement) {
+      inputElement.focus();
+      inputElement.select();
+    }
   }
 
   // Shows the person Modal when their name is clicked (little convoluted, maybe fix later)
