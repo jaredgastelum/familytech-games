@@ -43,7 +43,9 @@ function ClueList(props) {
     <>
       <div>
         <h1>Clues</h1>
-        <h4>Double click on a clue to move cursor in</h4>
+        <h4>
+          Double click on a clue to move cursor into the corresponding input
+        </h4>
         <h2>Down</h2>
         {clueList.VERTICAL.map((clues) => {
           return (
