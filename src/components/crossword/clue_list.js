@@ -71,6 +71,8 @@ function ClueList(props) {
           );
         })}
         <h3>Answers can be seen by right-clicking the clue</h3>
+        <h4>Want to see it on IOS!? Follow <a href="https://www.jackrabbitclass.com/blog/save-website-homepage-iphone/">these</a> instructons to get an app icon on your iphone
+        </h4>
       </div>
     </>
   );
