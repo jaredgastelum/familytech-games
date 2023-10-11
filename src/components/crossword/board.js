@@ -135,7 +135,7 @@ function Board() {
 
   // Implements navigating the board with arrow keys and backspace on empty square
   function handleKeyDown(event, row, col, inputLocation) {
-    if (event.keyCode === 37) {
+    if (event.keyCode === 37 || event.keyCode === 8) {
       let movedLocation =
         inputLocation.current[row * DIMENSIONS + col - 1].focus();
       if (movedLocation != null) {
