@@ -136,23 +136,110 @@ function Board() {
   // Implements navigating the board with arrow keys and backspace on empty square
   function handleKeyDown(event, row, col, inputLocation) {
     if (event.keyCode === 37) {
-      let movedLocation =
-        inputLocation.current[row * DIMENSIONS + col - 1].focus();
-      if (movedLocation != null) {
-        movedLocation.focus();
-        movedLocation.setSelectionRange(1, 1);
-      }
+      // Left arrow key
+      moveLeft(row, col, inputLocation);
     } else if (event.keyCode === 38) {
+      // Up arrow key
+      moveUp(row, col, inputLocation);
+    } else if (event.keyCode === 39) {
+      // Right arrow key
+      moveRight(row, col, inputLocation);
+    } else if (event.keyCode === 40) {
+      // Down arrow key
+      moveDown(row, col, inputLocation);
+    } else if (event.keyCode === 8) {
+      // Backspace
+      function handleBackspace(row, col, inputLocation) {
+        let currentInput = inputLocation.current[row * DIMENSIONS + col];
+        const currentValue = currentInput.value;
+
+        // Check if the input is not empty
+        if (currentValue.length > 0) {
+          const selectionStart = currentInput.selectionStart;
+          const selectionEnd = currentInput.selectionEnd;
+
+          // If there is a selection, delete the selected portion
+          if (selectionStart !== selectionEnd) {
+            currentInput.value =
+              currentValue.slice(0, selectionStart) +
+              currentValue.slice(selectionEnd);
+            currentInput.setSelectionRange(selectionStart, selectionStart);
+          } else if (selectionStart > 0) {
+            // If no selection, delete the character to the left
+            currentInput.value =
+              currentValue.slice(0, selectionStart - 1) +
+              currentValue.slice(selectionStart);
+            currentInput.setSelectionRange(
+              selectionStart - 1,
+              selectionStart - 1
+            );
+          }
+        } else {
+          // Move left or up if the input is empty
+          if (col > 0) {
+            moveLeft(row, col, inputLocation);
+          } else {
+            moveUp(row, col, inputLocation);
+          }
+        }
+      }
+    }
+  }
+
+  function moveLeft(row, col, inputLocation) {
+    if (col > 0) {
+      let movedLocation = inputLocation.current[row * DIMENSIONS + col - 1];
+      movedLocation.focus();
+      movedLocation.setSelectionRange(1, 1);
+    }
+  }
+
+  function moveUp(row, col, inputLocation) {
+    if (row > 0) {
       let movedLocation =
         inputLocation.current[row * DIMENSIONS + col - DIMENSIONS];
-      if (movedLocation != null) {
-        movedLocation.focus();
-        movedLocation.setSelectionRange(1, 1);
-      }
-    } else if (event.keyCode === 39) {
+      movedLocation.focus();
+      movedLocation.setSelectionRange(1, 1);
+    }
+  }
+
+  function moveRight(row, col, inputLocation) {
+    if (col < DIMENSIONS - 1) {
       inputLocation.current[row * DIMENSIONS + col + 1].focus();
-    } else if (event.keyCode === 40) {
+    }
+  }
+
+  function moveDown(row, col, inputLocation) {
+    if (row < DIMENSIONS - 1) {
       inputLocation.current[row * DIMENSIONS + col + DIMENSIONS].focus();
+    }
+  }
+
+  function handleBackspace(row, col, inputLocation) {
+    let currentInput = inputLocation.current[row * DIMENSIONS + col];
+    const currentValue = currentInput.value;
+
+    // Check if the input is not empty
+    if (currentValue.length > 0) {
+      const selectionStart = currentInput.selectionStart;
+      const selectionEnd = currentInput.selectionEnd;
+
+      // If there is a selection, delete the selected portion
+      if (selectionStart !== selectionEnd) {
+        currentInput.value =
+          currentValue.slice(0, selectionStart) +
+          currentValue.slice(selectionEnd);
+        currentInput.setSelectionRange(selectionStart, selectionStart);
+      } else if (selectionStart > 0) {
+        // If no selection, delete the character to the left
+        currentInput.value =
+          currentValue.slice(0, selectionStart - 1) +
+          currentValue.slice(selectionStart);
+        currentInput.setSelectionRange(selectionStart - 1, selectionStart - 1);
+      }
+    } else {
+      // Move left if the input is empty
+      moveLeft(row, col, inputLocation);
     }
   }
 

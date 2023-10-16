@@ -99,7 +99,9 @@ const q0 = function (person) {
       clue:
         "The name of " +
         fsData.getSpouse(person.a_num).name.full +
-        "'s spouse. Hint: Starts with " + person.name.compressedName.charAt(0) + ".",//+ person.name.charAt(0) + ".************",
+        "'s spouse. Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".", //+ person.name.charAt(0) + ".************",
     };
   } else {
     return q1(person);
@@ -113,7 +115,9 @@ const q1 = function (person) {
         fsData.getChild(person.a_num).name.full +
         " is this " +
         (person.gender == "Male" ? "man" : "woman") +
-        "'s child. Hint: Starts with " + person.name.compressedName.charAt(0) + ".",
+        "'s child. Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".",
       answer: person.name.compressedName,
     };
   } else {
@@ -132,7 +136,9 @@ const q2 = function (person) {
       clue:
         "This person is the father of " +
         fsData.getChild(person.a_num).name.full +
-        ". Hint: Starts with " + person.name.compressedName.charAt(0) + ".",
+        ". Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".",
       answer: person.name.compressedName,
     };
   } else {
@@ -147,7 +153,9 @@ const q3 = function (person) {
       clue:
         "This person is the mother of " +
         fsData.getChild(person.a_num).name.full +
-        ". Hint: Starts with " + person.name.compressedName.charAt(0) + ".",
+        ". Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".",
       answer: person.name.compressedName,
     };
   } else {
@@ -165,7 +173,9 @@ const q4 = function (person) {
         fsData.getFather(person.a_num).name.full +
         " and died in " +
         person.deathPlace +
-        ". Hint: Starts with " + person.name.compressedName.charAt(0) + ". This clue WAS CHANGED!!",
+        ". Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ". This clue WAS CHANGED!!",
       answer: person.name.compressedName,
     };
   } else {
@@ -180,7 +190,9 @@ const q5 = function (person) {
       clue:
         "This person is the child of " +
         fsData.getMother(person.a_num).name.full +
-        ". Hint: Starts with " + person.name.compressedName.charAt(0) + ".",
+        ". Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".",
       answer: person.name.compressedName,
     };
   } else {
@@ -198,7 +210,9 @@ const q6 = function (person) {
         person.lifespan.years +
         " in " +
         person.deathDate.year +
-        ". Hint: Starts with " + person.name.compressedName.charAt(0) + ".",
+        ". Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".",
       answer: person.name.compressedName,
     };
   } else {
@@ -223,7 +237,9 @@ const q7 = function (person) {
         person.birthDate.day +
         ", " +
         person.birthDate.year +
-        ". Hint: Starts with " + person.name.compressedName.charAt(0) + ".",
+        ". Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".",
       answer: person.name.compressedName,
     };
   } else {
@@ -239,7 +255,9 @@ const q8 = function (person) {
         person.birthPlace +
         " in " +
         person.birthDate.year +
-        ". Hint: Starts with " + person.name.compressedName.charAt(0) + ".",
+        ". Hint: Starts with " +
+        person.name.compressedName.charAt(0) +
+        ".",
       answer: person.name.compressedName,
     };
   } else {
