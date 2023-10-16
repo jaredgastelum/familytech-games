@@ -43,9 +43,8 @@ function ClueList(props) {
     <>
       <div>
         <h1>Clues</h1>
-        <h4>
-          Double click on a clue to move cursor into the corresponding input
-        </h4>
+        <p>Instructions: fill in the word search with the names of your ancestors according to the clue. Double click for the answer. The clue is at the end. Get it on mobile by following the instructions at the end.</p>
+        <h4>Double click on a clue to move cursor in</h4>
         <h2>Down</h2>
         {clueList.VERTICAL.map((clues) => {
           return (
